@@ -16,7 +16,7 @@ const Complaint = require('./src/models/complaint');
       description: 'Big hole near the park',
       location: {
         type: 'Point',
-        coordinates: [-122.4324, 37.78825] // [lng, lat]
+        coordinates: [-122.4324, 37.78826] // [lng, lat]
       },
       photos: [] // empty for the test
     });

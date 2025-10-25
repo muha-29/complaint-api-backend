@@ -16,6 +16,7 @@ const complaintSchema = new mongoose.Schema(
       default: 'Pending',
     },
     reporterId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    reporter: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );
