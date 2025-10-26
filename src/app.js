@@ -6,6 +6,7 @@ const { connectDB } = require('./config/db');
 const complaintRoutes = require('./routes/complaints');
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/userRoutes');
 
 
 const app = express();
@@ -22,6 +23,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/profile', profileRoutes);
 
 // Simple health check
 app.get('/health', (req, res) => res.send('OK'));

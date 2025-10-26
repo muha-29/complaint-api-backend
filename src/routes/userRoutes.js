@@ -10,7 +10,7 @@ const asyncHandler = fn => (req, res, next) => fn(req, res, next).catch(next);
 
 // 2️⃣ Get current user’s profile (requires auth middleware)
 // Example: you have `req.user` set by JWT or session
-router.get('/users/profile', asyncHandler(async (req, res) => {
+router.get('/profile', asyncHandler(async (req, res) => {
   // Replace `req.user.id` with whatever identifies the logged‑in user
   const user = await User.findById(req.user.id).select('-__v');
   if (!user) {
