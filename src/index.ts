@@ -1,12 +1,25 @@
+import 'dotenv/config';
 import express from 'express';
+import issuesRouter from './api/routes/issues';
+import authRouter from './api/routes/auth';
+import generateRouter from './api/routes/generate';
+import { errorHandler } from './api/middleware/errorHandler';
+import connectDB from './config/db';
+
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  const name = process.env.NAME || 'World';
-  res.send(`Hello ${name}!`);
-});
+// Connect to MongoDB
+connectDB();
 
-const port = parseInt(process.env.PORT || '3000');
+app.use(express.json());
+
+app.use('/api/issues', issuesRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/generate', generateRouter);
+
+app.use(errorHandler);
+
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
