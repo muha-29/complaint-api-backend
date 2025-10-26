@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules/
 .yarn/
@@ -48,3 +49,8 @@ Thumbs.db
 # Temporary files
 .tmp/
 *.temp
+=======
+node_modules/
+.env
+public/service-worker.js   # optional, will be regenerated
+>>>>>>> c573efb (Initial commit – full‑stack civic complaint PWA)
