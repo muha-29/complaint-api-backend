@@ -1,6 +1,6 @@
 // src/controllers/authController.js
 const jwt = require('jsonwebtoken');
-const User = require('./models/user');
+const User = require('../models/User');
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
