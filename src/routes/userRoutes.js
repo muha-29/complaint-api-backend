@@ -1,7 +1,7 @@
 // routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('./models/User');
 
 // Helper: error‑handling wrapper
 const asyncHandler = fn => (req, res, next) => fn(req, res, next).catch(next);
