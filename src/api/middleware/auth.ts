@@ -1,7 +1,7 @@
 
 import { Request, Response, NextFunction } from 'express-serve-static-core';
 import jwt from 'jsonwebtoken';
-import User, { IUser } from '../models/user';
+import User, { IUser } from './../models/user';
 
 interface AuthRequest extends Request {
   headers: any;
