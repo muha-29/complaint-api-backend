@@ -1,5 +1,5 @@
 
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express-serve-static-core';
 import * as issueService from '../services/issues';
 
 interface AuthenticatedRequest extends Request {

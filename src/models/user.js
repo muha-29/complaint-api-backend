@@ -1,19 +1,15 @@
-// src/models/user.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const userSchema = new mongoose.Schema(
-  {
-    username: { type: String, required: true, unique: true },
-    bio: { type: String, maxlength: 500 },
-    password: { type: String, required: true },
-    email: { type: String, sparse: true },
-    role: { type: String, enum: ['citizen', 'admin'], default: 'citizen' },
-  },
-  { timestamps: true }
-);
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['citizen', 'admin'], default: 'citizen' },
+  createdAt: { type: Date, default: Date.now }
+});
 
-// Hash password before saving
+// Password hashing middleware
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
@@ -21,9 +17,11 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-// Helper to compare passwords
 userSchema.methods.matchPassword = async function (candidate) {
   return bcrypt.compare(candidate, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+// ------------------------------------------------------------
+// Safeguard: only define the model if it doesn’t exist yet
+// ------------------------------------------------------------
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

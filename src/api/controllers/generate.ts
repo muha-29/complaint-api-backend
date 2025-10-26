@@ -1,5 +1,5 @@
 
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express-serve-static-core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 if (!process.env.GEMINI_API_KEY) {

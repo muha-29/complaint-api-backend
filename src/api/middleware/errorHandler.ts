@@ -1,5 +1,5 @@
 
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express-serve-static-core';
 
 export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
