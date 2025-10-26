@@ -22,7 +22,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api/users', userRoutes);
 
 // Simple health check
 app.get('/health', (req, res) => {
