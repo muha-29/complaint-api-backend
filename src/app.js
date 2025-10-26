@@ -5,9 +5,8 @@ const cors = require('cors');
 const { connectDB } = require('./config/db');
 const complaintRoutes = require('./routes/complaints');
 const adminRoutes = require('./routes/admin');
-const authRoutes = require('./routes/auth');
-const profileRoutes = require('./routes/userRoutes');
-
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -23,9 +22,10 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/profile', profileRoutes);
+app.use('/api/users', userRoutes);
 
 // Simple health check
-app.get('/health', (req, res) => res.send('OK'));
-
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Server is running' });
+});
 module.exports = app;

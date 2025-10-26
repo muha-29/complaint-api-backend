@@ -1,22 +1,28 @@
-// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
-const User = require('./models/User');
+const {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  updateUserProfile,
+  getAllUsers,
+  getUserById,
+  deleteUser
+} = require('../controllers/userController');
+const auth = require('../middleware/auth');
+const adminAuth = require('../middleware/adminAuth');
 
-// Helper: error‑handling wrapper
-const asyncHandler = fn => (req, res, next) => fn(req, res, next).catch(next);
+// Public routes
+router.post('/register', registerUser);
+router.post('/login', loginUser);
 
+// Protected routes (requires authentication)
+router.get('/profile', auth, getUserProfile);
+router.put('/profile', auth, updateUserProfile);
 
-
-// 2️⃣ Get current user’s profile (requires auth middleware)
-// Example: you have `req.user` set by JWT or session
-router.get('/profile', asyncHandler(async (req, res) => {
-  // Replace `req.user.id` with whatever identifies the logged‑in user
-  const user = await User.findById(req.user.id).select('-__v');
-  if (!user) {
-    return res.status(404).json({ message: 'Profile not found' });
-  }
-  res.json(user);
-}));
+// Admin routes (requires admin role)
+router.get('/', auth, adminAuth, getAllUsers);
+router.get('/:id', auth, adminAuth, getUserById);
+router.delete('/:id', auth, adminAuth, deleteUser);
 
 module.exports = router;
